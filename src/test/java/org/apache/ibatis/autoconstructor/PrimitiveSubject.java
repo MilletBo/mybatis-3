@@ -15,6 +15,13 @@
  */
 package org.apache.ibatis.autoconstructor;
 
+/**
+ * 对应CreateDB.sql中的subject表
+ * 和AnnotatedSubject不同，在其构造方法上，weight和height方法参数的类型是int,而不是integer
+ * 那么如果subject表中的记录，这两个字段为NULL时，会创建PrimitiveSubject对象报错
+ * @author milletbo
+ *
+ */
 public class PrimitiveSubject {
   private final int id;
   private final String name;

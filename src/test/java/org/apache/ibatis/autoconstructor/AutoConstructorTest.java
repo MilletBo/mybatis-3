@@ -15,6 +15,10 @@
  */
 package org.apache.ibatis.autoconstructor;
 
+import java.io.Reader;
+import java.sql.Connection;
+import java.util.List;
+
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -26,23 +30,22 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.Reader;
-import java.sql.Connection;
-import java.util.List;
-
 public class AutoConstructorTest {
   private static SqlSessionFactory sqlSessionFactory;
 
   @BeforeClass
   public static void setUp() throws Exception {
     // create a SqlSessionFactory
+	// 创建SqlSessionFactory对象，基于mybatis-config.xml配置文件
     final Reader reader = Resources.getResourceAsReader("org/apache/ibatis/autoconstructor/mybatis-config.xml");
     sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
     reader.close();
 
     // populate in-memory database
+    // 初始化数据到内存数据库，基于CreateDB.sql SQL文件
     final SqlSession session = sqlSessionFactory.openSession();
     final Connection conn = session.getConnection();
+    //获取资源
     final Reader dbReader = Resources.getResourceAsReader("org/apache/ibatis/autoconstructor/CreateDB.sql");
     final ScriptRunner runner = new ScriptRunner(conn);
     runner.setLogWriter(null);

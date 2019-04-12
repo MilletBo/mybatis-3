@@ -17,6 +17,11 @@ package org.apache.ibatis.autoconstructor;
 
 import org.apache.ibatis.annotations.AutomapConstructor;
 
+/**
+ * 对应CreateDb,sql中的subject表
+ * @author milletbo
+ *
+ */
 public class AnnotatedSubject {
   private final int id;
   private final String name;
@@ -32,6 +37,9 @@ public class AnnotatedSubject {
     this.weight = weight;
   }
 
+  /**
+   * <p>@AutomapConstructor 注解表示Mybatis查询后，在创建AnnotatedSubject对象，并使用该构造方法 </p>
+   */
   @AutomapConstructor
   public AnnotatedSubject(final int id, final String name, final int age, final Integer height, final Integer weight) {
     this.id = id;
